@@ -1,6 +1,6 @@
 package com.example.personalfinance.activities;
 
-import android.content.Intent;
+import android.content.Intent;                                 // untuk startActivity
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -8,10 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.personalfinance.R;
-import com.example.personalfinance.models.Transaction;
+import com.example.personalfinance.models.Transaction;        // model Transaction
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
     private TextView incomeText, expenseText, balanceText;
@@ -24,17 +29,35 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Inisialisasi view
         incomeText = findViewById(R.id.totalIncome);
         expenseText = findViewById(R.id.totalExpense);
         balanceText = findViewById(R.id.totalBalance);
-
-        // Button untuk tambah transaksi
         FloatingActionButton fab = findViewById(R.id.fabAddTransaction);
-        fab.setOnClickListener(v -> {
-            startActivity(new Intent(HomeActivity.this, AddTransactionActivity.class));
+
+        // FAB: pindah ke AddTransactionActivity
+        fab.setOnClickListener(v ->
+                startActivity(new Intent(HomeActivity.this, AddTransactionActivity.class))
+        );
+
+        // Bottom Navigation: pindah halaman
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        bottomNav.setSelectedItemId(R.id.nav_home); // default
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                return true;  // tetap di Home
+            } else if (id == R.id.nav_history) {
+                startActivity(new Intent(HomeActivity.this, HistoryActivity.class));
+                return true;
+            } else if (id == R.id.nav_settings) {
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                return true;
+            }
+            return false;
         });
 
-        // Inisialisasi Firebase dan listener data
+        // Inisialisasi Firebase dan listener data transaksi
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance()
                 .getReference("transactions")
@@ -59,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Bisa ditambahkan log error jika perlu
+                // optional: log error
             }
         });
     }
