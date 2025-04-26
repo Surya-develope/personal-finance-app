@@ -18,7 +18,8 @@
             android:hint="Jumlah (Rp)"
             android:inputType="number"
             android:fontFamily="@font/poppins_regular"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:id="@+id/inputNote"
@@ -26,7 +27,8 @@
             android:layout_height="wrap_content"
             android:hint="Catatan"
             android:fontFamily="@font/poppins_regular"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:textColor="#000000"/>
 
         <RadioGroup
             android:id="@+id/radioGroupType"
@@ -39,14 +41,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pemasukan"
-                android:fontFamily="@font/poppins_regular"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="#000000"/>
 
             <RadioButton
                 android:id="@+id/radioExpense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pengeluaran"
-                android:fontFamily="@font/poppins_regular"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="#000000"/>
         </RadioGroup>
 
         <Button
@@ -54,7 +58,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simpan Transaksi"
+            android:textColor="@android:color/white"
             android:fontFamily="@font/poppins_regular"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/green_teal"/>
     </LinearLayout>
 </ScrollView>
