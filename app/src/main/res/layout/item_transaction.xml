@@ -1,33 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
 
-    <TextView
-        android:id="@+id/transactionType"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pemasukan"
-        android:textStyle="bold" />
+        android:background="@color/cardview_light_background">
 
-    <TextView
-        android:id="@+id/transactionAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp0" />
+        <TextView
+            android:id="@+id/textTransactionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul Transaksi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"/>
 
-    <TextView
-        android:id="@+id/transactionNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Catatan: -"/>
+        <TextView
+            android:id="@+id/textTransactionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp0"
+            android:textSize="16sp"
+            android:textColor="#00BFA6"
+            android:layout_marginTop="4dp"/>
 
-    <TextView
-        android:id="@+id/transactionTimestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timestamp" />
+        <TextView
+            android:id="@+id/textTransactionDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal Transaksi"
+            android:textSize="14sp"
+            android:textColor="#777777"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

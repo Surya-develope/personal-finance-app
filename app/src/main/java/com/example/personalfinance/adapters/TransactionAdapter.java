@@ -1,12 +1,12 @@
 package com.example.personalfinance.adapters;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.personalfinance.R;
 import com.example.personalfinance.models.Transaction;
@@ -17,56 +17,51 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class TransactionAdapter extends ArrayAdapter<Transaction> {
+public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
-    public TransactionAdapter(Context context, List<Transaction> transactions) {
-        super(context, 0, transactions);
+    private Context context;
+    private List<Transaction> transactionList;
+
+    public TransactionAdapter(Context context, List<Transaction> transactionList) {
+        this.context = context;
+        this.transactionList = transactionList;
     }
 
-    private static class ViewHolder {
-        TextView typeText, amountText, noteText, timestampText;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textTransactionTitle, textTransactionAmount, textTransactionDate;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            textTransactionTitle = itemView.findViewById(R.id.textTransactionTitle);
+            textTransactionAmount = itemView.findViewById(R.id.textTransactionAmount);
+            textTransactionDate = itemView.findViewById(R.id.textTransactionDate);
+        }
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_transaction, parent, false);
+        return new ViewHolder(view);
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.item_transaction, parent, false);
-            holder = new ViewHolder();
-            holder.typeText      = convertView.findViewById(R.id.transactionType);
-            holder.amountText    = convertView.findViewById(R.id.transactionAmount);
-            holder.noteText      = convertView.findViewById(R.id.transactionNote);
-            holder.timestampText = convertView.findViewById(R.id.transactionTimestamp);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Transaction t = transactionList.get(position);
 
-        Transaction t = getItem(position);
-        if (t != null) {
-            // Tampilkan tipe (Income / Expense)
-            holder.typeText.setText(
-                    t.type.equals("income") ? "Pemasukan" : "Pengeluaran"
-            );
+        holder.textTransactionTitle.setText(
+                t.note.isEmpty() ? (t.type.equals("income") ? "Pemasukan" : "Pengeluaran") : t.note
+        );
+        holder.textTransactionAmount.setText(formatCurrency(t.amount));
+        holder.textTransactionDate.setText(formatDate(t.timestamp));
+    }
 
-            // Format jumlah ke Rupiah dengan pemisah ribuan
-            holder.amountText.setText(formatCurrency(t.amount));
-
-            // Catatan
-            holder.noteText.setText(t.note);
-
-            // Format timestamp ke tanggal yang bisa dibaca
-            holder.timestampText.setText(formatDate(t.timestamp));
-        }
-
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return transactionList.size();
     }
 
     private String formatCurrency(int amount) {
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-        // Hasil akan seperti "Rp10.000,00" — jika ingin tanpa desimal, hapus fractionDigits:
         nf.setMaximumFractionDigits(0);
         return nf.format(amount);
     }

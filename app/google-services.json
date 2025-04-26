@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "34028733339",
-    "project_id": "personalfinance-36ce1",
-    "storage_bucket": "personalfinance-36ce1.firebasestorage.app"
+    "project_number": "348863004416",
+    "project_id": "utspeber",
+    "storage_bucket": "utspeber.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34028733339:android:4107700b89a76246bf973e",
+        "mobilesdk_app_id": "1:348863004416:android:5ecaef50f8c2329b953de5",
         "android_client_info": {
           "package_name": "com.example.personalfinance"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC7_LyIEZxnK8EqvMawGwFlSKlQ-PWZZh0"
+          "current_key": "AIzaSyBVWhfqz462eMVHUHG3m55CDU0P7FGx094"
         }
       ],
       "services": {

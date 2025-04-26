@@ -1,69 +1,159 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     android:padding="16dp">
 
-    <!-- Ringkasan Keuangan -->
+    <!-- Header Greeting -->
     <TextView
-        android:id="@+id/totalIncome"
-        android:layout_width="0dp"
+        android:id="@+id/greetingText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pemasukan: Rp0"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
+        android:text="Halo, User 👋"
+        android:textSize="24sp"
+        android:textColor="#212121"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/totalExpense"
+    <!-- CardView Summary -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/summaryCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Pengeluaran: Rp0"
-        android:textSize="18sp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/totalIncome"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/greetingText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/totalBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp0"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/green_teal"
+                android:fontFamily="@font/poppins_bold" />
+
+            <TextView
+                android:id="@+id/balanceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Saldo"
+                android:textSize="16sp"
+                android:textColor="#757575"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_regular" />
+
+            <!-- Divider Line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginVertical="16dp" />
+
+            <!-- Income and Expense Layout -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/totalIncome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp0"
+                        android:textSize="18sp"
+                        android:textColor="#4CAF50"
+                        android:fontFamily="@font/poppins_bold" />
+
+                    <TextView
+                        android:text="Pemasukan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#757575"
+                        android:fontFamily="@font/poppins_regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/totalExpense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp0"
+                        android:textSize="18sp"
+                        android:textColor="#F44336"
+                        android:fontFamily="@font/poppins_bold" />
+
+                    <TextView
+                        android:text="Pengeluaran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#757575"
+                        android:fontFamily="@font/poppins_regular" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <!-- FloatingActionButton -->
-    <TextView
-        android:id="@+id/totalBalance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Saldo: Rp0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalExpense" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Tambah Transaksi"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"/>
+        android:contentDescription="Tambah Transaksi"
+        app:backgroundTint="@color/green_teal"
+        app:tint="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Navigation -->
+    <!-- Floating BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@drawable/bottom_nav_background"
         app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="8dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

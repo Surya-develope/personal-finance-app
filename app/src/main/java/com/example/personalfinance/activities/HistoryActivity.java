@@ -2,10 +2,11 @@ package com.example.personalfinance.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.personalfinance.R;
 import com.example.personalfinance.adapters.TransactionAdapter;
@@ -15,11 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private ListView listView;
-    private ArrayList<Transaction> transactionList;
+    private RecyclerView recyclerView;
+    private List<Transaction> transactionList;
     private TransactionAdapter adapter;
     private DatabaseReference db;
     private FirebaseAuth auth;
@@ -29,15 +31,16 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        // Inisialisasi ListView & Adapter
-        listView = findViewById(R.id.listViewHistory);
+        // Inisialisasi RecyclerView
+        recyclerView = findViewById(R.id.listViewHistory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         transactionList = new ArrayList<>();
         adapter = new TransactionAdapter(this, transactionList);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         // Inisialisasi BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-        bottomNav.setSelectedItemId(R.id.nav_history);  // Set tab aktif
+        bottomNav.setSelectedItemId(R.id.nav_history);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
@@ -45,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (id == R.id.nav_history) {
-                // tetap di sini
+                // tetap di halaman ini
                 return true;
             } else if (id == R.id.nav_settings) {
                 startActivity(new Intent(this, SettingsActivity.class));
@@ -55,12 +58,13 @@ public class HistoryActivity extends AppCompatActivity {
             return false;
         });
 
-        // Inisialisasi Firebase dan ambil data transaksi
+        // Inisialisasi Firebase
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance()
                 .getReference("transactions")
                 .child(auth.getUid());
 
+        // Ambil data transaksi dari Firebase
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -76,7 +80,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // tangani error jika perlu
+                // Tangani error jika perlu
             }
         });
     }

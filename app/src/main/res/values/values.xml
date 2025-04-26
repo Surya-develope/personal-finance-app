@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">348863004416</string>
+    <string name="google_api_key" translatable="false">AIzaSyBVWhfqz462eMVHUHG3m55CDU0P7FGx094</string>
+    <string name="google_app_id" translatable="false">1:348863004416:android:5ecaef50f8c2329b953de5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBVWhfqz462eMVHUHG3m55CDU0P7FGx094</string>
+    <string name="google_storage_bucket" translatable="false">utspeber.firebasestorage.app</string>
+    <string name="project_id" translatable="false">utspeber</string>
+</resources>
