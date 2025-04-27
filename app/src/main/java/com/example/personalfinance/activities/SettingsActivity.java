@@ -24,26 +24,22 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Inisialisasi komponen
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
         emailText = findViewById(R.id.userEmail);
         logoutBtn = findViewById(R.id.logoutBtn);
 
-        // Tampilkan email pengguna jika ada
         if (user != null) {
             emailText.setText("Email: " + user.getEmail());
         }
 
-        // Logika logout
         logoutBtn.setOnClickListener(v -> {
             auth.signOut();
             startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
-            finish();  // Agar tidak bisa kembali ke Settings setelah logout
+            finish();
         });
 
-        // Inisialisasi BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setSelectedItemId(R.id.nav_settings);  // Set tab aktif pada settings
         bottomNav.setOnItemSelectedListener(item -> {
@@ -57,7 +53,6 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (id == R.id.nav_settings) {
-                // tetap di halaman Settings
                 return true;
             }
             return false;

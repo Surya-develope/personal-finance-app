@@ -7,10 +7,8 @@ public class Transaction {
     public int amount;
     public long timestamp;
 
-    // Konstruktor kosong dibutuhkan oleh Firebase
     public Transaction() { }
 
-    // Konstruktor lengkap
     public Transaction(String id, String type, int amount, String note, long timestamp) {
         this.id = id;
         this.type = type;
@@ -19,7 +17,6 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    // Getter opsional (gunakan jika kamu mau akses lebih aman)
     public String getType() {
         return type;
     }

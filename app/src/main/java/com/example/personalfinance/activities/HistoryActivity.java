@@ -31,14 +31,12 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        // Inisialisasi RecyclerView
         recyclerView = findViewById(R.id.listViewHistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         transactionList = new ArrayList<>();
         adapter = new TransactionAdapter(this, transactionList);
         recyclerView.setAdapter(adapter);
 
-        // Inisialisasi BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setSelectedItemId(R.id.nav_history);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -58,13 +56,11 @@ public class HistoryActivity extends AppCompatActivity {
             return false;
         });
 
-        // Inisialisasi Firebase
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance()
                 .getReference("transactions")
                 .child(auth.getUid());
 
-        // Ambil data transaksi dari Firebase
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

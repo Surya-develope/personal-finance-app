@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Personalfinance">
 
-        <!-- Activity entry point -->
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
@@ -23,7 +22,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Aktivitas lainnya -->
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="false" />
@@ -36,7 +34,6 @@
             android:name=".activities.AddTransactionActivity"
             android:exported="false" />
 
-        <!-- Profil dan pengaturan -->
         <activity
             android:name=".activities.ProfileActivity"
             android:exported="false" />
@@ -45,7 +42,6 @@
             android:name=".activities.SettingsActivity"
             android:exported="false" />
 
-        <!-- Menambahkan HistoryActivity -->
         <activity
             android:name=".activities.HistoryActivity"
             android:exported="false" />

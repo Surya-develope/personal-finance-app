@@ -19,15 +19,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Inisialisasi FirebaseAuth dan current user
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
-        // Inisialisasi View
         emailText = findViewById(R.id.userEmail);
         uidText   = findViewById(R.id.userUid);
 
-        // Tampilkan data user jika tersedia
         if (user != null) {
             emailText.setText("Email: " + user.getEmail());
             uidText.setText("User ID: " + user.getUid());

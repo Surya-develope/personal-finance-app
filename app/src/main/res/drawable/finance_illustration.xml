@@ -5,13 +5,10 @@
     android:viewportWidth="200"
     android:viewportHeight="200">
 
-    <!-- Background Circle -->
     <path
         android:fillColor="#E0F7FA"
         android:pathData="M100,0
             A100,100 0 1,1 99.9,0Z" />
-
-    <!-- Wallet Shape -->
     <path
         android:fillColor="#00BFA6"
         android:pathData="M50,90
@@ -23,16 +20,12 @@
             Q40,150 40,140
             L40,100
             Q40,90 50,90Z" />
-
-    <!-- Wallet Stripe -->
     <path
         android:fillColor="#00897B"
         android:pathData="M45,95
             L155,95
             L155,105
             L45,105Z" />
-
-    <!-- Money (Bill) -->
     <path
         android:fillColor="#A7FFEB"
         android:pathData="M60,70
@@ -42,8 +35,6 @@
             L55,95
             L55,75
             Q55,70 60,70Z" />
-
-    <!-- Money Circle Icon -->
     <path
         android:fillColor="#00BFA6"
         android:pathData="M100,77

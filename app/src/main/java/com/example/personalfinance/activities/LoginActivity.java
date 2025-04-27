@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Inisialisasi Firebase Auth dan komponen UI
         auth = FirebaseAuth.getInstance();
         emailInput = findViewById(R.id.inputEmail);
         passwordInput = findViewById(R.id.inputPassword);
@@ -36,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.btnRegister);
         showPasswordBtn = findViewById(R.id.btnShowPassword);
 
-        // Tampilkan / Sembunyikan Password
         showPasswordBtn.setOnClickListener(v -> {
             if (passwordInput.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
                 passwordInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -47,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Tombol Login
         loginBtn.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
@@ -64,11 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Proses Login
             loginUser(email, password);
         });
 
-        // Tombol Daftar
         registerBtn.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
@@ -76,13 +71,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        // Menampilkan loading indicator
-        loginBtn.setEnabled(false); // Menonaktifkan tombol login sementara
+        loginBtn.setEnabled(false);
         loginBtn.setText("Memuat...");
 
         auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-                    loginBtn.setEnabled(true); // Mengaktifkan kembali tombol login
+                    loginBtn.setEnabled(true);
                     loginBtn.setText("Masuk");
                     FirebaseUser user = auth.getCurrentUser();
                     if (user != null) {
@@ -92,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    loginBtn.setEnabled(true); // Mengaktifkan kembali tombol login
+                    loginBtn.setEnabled(true);
                     loginBtn.setText("Masuk");
                     Toast.makeText(LoginActivity.this, "Login gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
